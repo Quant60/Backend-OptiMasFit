@@ -35,7 +35,6 @@ jobs:
         python-version: '3.12'
 
     - name: Install dependencies
-      working-directory: optimassfit
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
@@ -43,24 +42,20 @@ jobs:
     - name: Run migrations
       env:
         DATABASE_URL: postgres://postgres:postgres@localhost:5432/test_db
-        working-directory: optimassfit
       run: |
-        python optimassfit/manage.py migrate --noinput
+        python manage.py migrate --noinput
 
     - name: Run tests
       env:
         DATABASE_URL: postgres://postgres:postgres@localhost:5432/test_db
-        working-directory: optimassfit
       run: |
-        pytest --maxfail=1 --disable-warnings -q
+        pytest --maxfail=1 --disable-warnings -q optimassfit
 
     - name: Lint with flake8
-      working-directory: optimassfit
       run: |
         pip install flake8
-        flake8 .
+        flake8 optimassfit
 
     - name: Build OpenAPI schema
-      working-directory: optimassfit
       run: |
         python manage.py spectacular --validate
