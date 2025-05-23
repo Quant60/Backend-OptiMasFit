@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>OptiMassFit - Личный кабинет</title>
+  <style>
+    body {
+      background-color: #2c3036;
+      color: #ffffff;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    .top-nav {
+      background-color: #373d42;
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+    }
+    .top-nav span {
+      font-size: 1.2em;
+      font-weight: bold;
+      margin-right: 30px;
+    }
+    .top-nav a {
+      background-color: #004f91;
+      color: #ffffff;
+      text-decoration: none;
+      font-weight: bold;
+      padding: 10px 18px;
+      border-radius: 4px;
+      margin-right: 20px;
+      transition: background-color 0.3s;
+    }
+    .top-nav a:hover {
+      background-color: #003d70;
+    }
+    .container {
+      max-width: 700px;
+      margin: 30px auto;
+      padding: 20px;
+    }
+    .card {
+      background-color: #373d42;
+      border-radius: 4px;
+      padding: 15px;
+      margin-bottom: 20px;
+    }
+    .card h2 {
+      margin-top: 0;
+      color: #ffffff;
+    }
+    p {
+      margin: 10px 0;
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+    li {
+      margin-bottom: 8px;
+    }
+    .btn-row a {
+      background-color: #004f91;
+      color: #ffffff;
+      padding: 10px 18px;
+      border-radius: 4px;
+      text-decoration: none;
+      margin-right: 10px;
+      transition: background-color 0.3s;
+    }
+    .btn-row a:hover {
+      background-color: #003d70;
+    }
+  </style>
+</head>
+<body>
+  <div class="top-nav">
+    <span>OptiMassFit</span>
+    {% if user.is_authenticated %}
+      <a href="{% url 'user_dashboard' %}">Личный кабинет</a>
+      {% if user.is_superuser or user.is_staff %}
+         <a href="{% url 'custom_admin_dashboard' %}">Админ панель</a>
+      {% endif %}
+      <a href="{% url 'logout' %}">Выйти</a>
+    {% else %}
+      <a href="{% url 'login' %}">Войти</a>
+      <a href="{% url 'register' %}">Регистрация</a>
+    {% endif %}
+  </div>
+  <div class="container">
+    <h1>Личный кабинет</h1>
+    <p><b>Имя пользователя:</b> {{ user.username }}</p>
+    <p><b>Email:</b> {{ user.email }}</p>
+    <p><b>Рост:</b> {{ user.height }} см</p>
+
+    <!-- Выводим "снимок" данных, если план существует -->
+    {% if current_plan %}
+      <p><b>Возраст (на момент плана):</b> {{ current_plan.age_snapshot }}</p>
+      <p><b>Вес (на момент плана):</b> {{ current_plan.weight_snapshot }} кг</p>
+      <p><b>Цель (на момент плана):</b> {{ current_plan.goal_snapshot }}</p>
+      <p><b>Уровень тренировок (на момент плана):</b> {{ current_plan.training_level_snapshot }}</p>
+    {% else %}
+      <p><b>Возраст:</b> {{ user.age }}</p>
+      <p><b>Вес:</b> {{ user.weight }} кг</p>
+      <p><b>Цель:</b> {{ user.get_goal_display }}</p>
+      <p><b>Уровень тренировок:</b> {{ user.training_level }}</p>
+    {% endif %}
+
+    <div class="card">
+      <h2>Рассчитанная норма питания</h2>
+      <p><b>Калории:</b> {{ calories }} ккал</p>
+      <p><b>Белки:</b> {{ macros.proteins }} г</p>
+      <p><b>Жиры:</b> {{ macros.fats }} г</p>
+      <p><b>Углеводы:</b> {{ macros.carbs }} г</p>
+    </div>
+
+    <div class="card">
+      <h2>Рекомендации по тренировкам</h2>
+      <p>{{ training_recommendations.description }}</p>
+      {% if training_recommendations.workouts %}
+        <ul>
+          {% for workout in training_recommendations.workouts %}
+            <li>{{ workout }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    </div>
+
+    <div class="card">
+      <h2>История планов</h2>
+      {% if plan_history %}
+        <ul>
+          {% for plan in plan_history %}
+            <li>
+              <a href="{% url 'user_plan' plan.id %}" style="color: #ffffff;">
+                План от {{ plan.date_created|date:"d.m.Y" }}
+              </a>
+            </li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p>Пока планов нет.</p>
+      {% endif %}
+    </div>
+
+    <div class="btn-row">
+      <a href="{% url 'profile_update' %}">Редактировать профиль</a>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OptiMassFit - Главная</title>
+  <style>
+    body {
+      background-color: #2c3036;
+      color: #ffffff;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    .top-nav {
+      background-color: #373d42;
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+    }
+    .top-nav span {
+      font-size: 1.2em;
+      font-weight: bold;
+      margin-right: 30px;
+    }
+    .top-nav a {
+      background-color: #004f91;
+      color: #ffffff;
+      text-decoration: none;
+      font-weight: bold;
+      padding: 10px 18px;
+      border-radius: 4px;
+      margin-right: 20px;
+      transition: background-color 0.3s;
+    }
+    .top-nav a:hover {
+      background-color: #003d70;
+    }
+    .container {
+      max-width: 800px;
+      margin: 30px auto;
+      padding: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="top-nav">
+    <span>OptiMassFit</span>
+    {% if user.is_authenticated %}
+      <a href="{% url 'user_dashboard' %}">Личный кабинет</a>
+      {% if user.is_superuser or user.is_staff %}
+        <a href="{% url 'custom_admin_dashboard' %}">Админ панель</a>
+      {% endif %}
+      <a href="{% url 'logout' %}">Выйти</a>
+    {% else %}
+      <a href="{% url 'login' %}">Войти</a>
+      <a href="{% url 'register' %}">Регистрация</a>
+    {% endif %}
+  </div>
+  <div class="container">
+    <h1>Добро пожаловать в OptiMassFit!</h1>
+    <p>Ваш персональный портал для создания фитнес-планов, отслеживания питания и тренировок.</p>
+  </div>
+</body>
+</html>

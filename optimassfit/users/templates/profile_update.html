@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OptiMassFit - Редактирование профиля</title>
+  <style>
+    body {
+      background-color: #2c3036;
+      color: #ffffff;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    .top-nav {
+      background-color: #373d42;
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+    }
+    .top-nav span {
+      font-size: 1.2em;
+      font-weight: bold;
+      margin-right: 30px;
+    }
+    .top-nav a {
+      background-color: #004f91;
+      color: #ffffff;
+      text-decoration: none;
+      font-weight: bold;
+      padding: 10px 18px;
+      border-radius: 4px;
+      margin-right: 20px;
+      transition: background-color 0.3s;
+    }
+    .top-nav a:hover {
+      background-color: #003d70;
+    }
+    .container {
+      max-width: 600px;
+      margin: 30px auto;
+      padding: 20px;
+    }
+    form {
+      margin-top: 20px;
+    }
+    form p {
+      margin-bottom: 15px;
+    }
+    form label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+    form input, form select {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 10px;
+      border: 1px solid #004f91;
+      border-radius: 4px;
+    }
+    form button {
+      background-color: #004f91;
+      color: #ffffff;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    form button:hover {
+      background-color: #003d70;
+    }
+  </style>
+</head>
+<body>
+  <div class="top-nav">
+    <span>OptiMassFit</span>
+    <a href="{% url 'user_dashboard' %}">Личный кабинет</a>
+    <a href="{% url 'logout' %}">Выйти</a>
+  </div>
+  <div class="container">
+    <h1>Редактирование профиля</h1>
+    <form method="POST">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit">Сохранить изменения</button>
+    </form>
+  </div>
+</body>
+</html>
