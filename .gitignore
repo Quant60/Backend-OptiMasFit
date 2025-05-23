@@ -8,5 +8,5 @@ users/__pycache__/
 optimassfit/users/templates/
 users/migrations/
 optimassfit/optimassfit/
-optimassfit/locustfile.py
+optimassfit/locustfile.py/
 optimassfit/users/__pycache__/
