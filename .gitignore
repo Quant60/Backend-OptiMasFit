@@ -2,11 +2,11 @@
 __pycache__/
 .idea/
 backend.py
-.github/workflows/
 optimassfit/__pycache__/
 users/__pycache__/
 optimassfit/users/templates/
 users/migrations/
-optimassfit/optimassfit/
-optimassfit/locustfile.py/
+
 optimassfit/users/__pycache__/
+optimassfit/users/migrations/
+optimassfit/users/__init__.py/
