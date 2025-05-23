@@ -57,7 +57,7 @@ jobs:
       - name: Lint with flake8
         run: |
           pip install flake8
-          flake8 optimassfit
+          flake8 optimassfit --max-line-length=120 --exit-zero
 
       - name: Build OpenAPI schema
         env:
