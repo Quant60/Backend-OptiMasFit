@@ -8,7 +8,6 @@ class PlanAdmin(admin.ModelAdmin):
     list_display   = ['user', 'date_created', 'calories']
     search_fields  = ['user__username']
     list_filter    = ['date_created', 'user']
-    # стандартный экшен «Delete selected Plan» уже присутствует
 
 
 # ───── UserAdmin ─────
@@ -34,10 +33,10 @@ def delete_all_plans(modeladmin, request, queryset):
 def delete_users_and_plans(modeladmin, request, queryset):
     total_users = queryset.count()
     total_plans = sum(u.plans.count() for u in queryset)
-    # сначала удаляем планы
+
     for user in queryset:
         user.plans.all().delete()
-    # потом самих пользователей
+
     deleted, _ = queryset.delete()
 
     modeladmin.message_user(
