@@ -5,8 +5,8 @@ backend.py
 .github/workflows/
 optimassfit/__pycache__/
 users/__pycache__/
-users/templates/
+optimassfit/users/templates/
 users/migrations/
 optimassfit/optimassfit/
-optimassfit/locustfile.py/
+optimassfit/locustfile.py
 optimassfit/users/__pycache__/
