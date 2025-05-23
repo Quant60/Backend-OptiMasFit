@@ -106,7 +106,6 @@ DATABASES = {
 }
 
 SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', get_random_secret_key())
-
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 
