@@ -94,18 +94,18 @@ DATABASES = {
 import os
 from django.core.management.utils import get_random_secret_key
 
+SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', get_random_secret_key())
+
 DATABASES = {
     'default': {
         'ENGINE':   'django.db.backends.postgresql',
-        'NAME':     os.getenv('POSTGRES_DB',     'your_default_db'),
+        'NAME':     os.getenv('POSTGRES_DB',     'test_db'),
         'USER':     os.getenv('POSTGRES_USER',   'postgres'),
         'PASSWORD': os.getenv('POSTGRES_PASSWORD','postgres'),
         'HOST':     os.getenv('POSTGRES_HOST',   'localhost'),
         'PORT':     os.getenv('POSTGRES_PORT',   '5432'),
     }
 }
-
-SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', get_random_secret_key())
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 
