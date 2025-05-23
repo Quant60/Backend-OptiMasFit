@@ -45,7 +45,7 @@ jobs:
         DATABASE_URL: postgres://postgres:postgres@localhost:5432/test_db
         working-directory: optimassfit
       run: |
-        python manage.py migrate --noinput
+        python optimassfit/manage.py migrate --noinput
 
     - name: Run tests
       env:
