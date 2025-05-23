@@ -35,7 +35,7 @@ jobs:
           pwd
           echo "=== ROOT CONTENT ==="
           ls -la .
-          echo "=== RECURSIVE ==="
+          echo "=== RECURSIVE TREE ==="
           ls -R .
 
       - name: Set up Python
@@ -52,15 +52,13 @@ jobs:
         env:
           DATABASE_URL: postgres://postgres:postgres@localhost:5432/test_db
           DJANGO_SETTINGS_MODULE: optimassfit.optimassfit.settings
-        run: |
-          python manage.py migrate --noinput
+        run: python manage.py migrate --noinput
 
       - name: Run tests
         env:
           DATABASE_URL: postgres://postgres:postgres@localhost:5432/test_db
           DJANGO_SETTINGS_MODULE: optimassfit.optimassfit.settings
-        run: |
-          pytest --maxfail=1 --disable-warnings -q optimassfit
+        run: pytest --maxfail=1 --disable-warnings -q optimassfit
 
       - name: Lint with flake8
         run: |
@@ -70,5 +68,4 @@ jobs:
       - name: Build OpenAPI schema
         env:
           DJANGO_SETTINGS_MODULE: optimassfit.optimassfit.settings
-        run: |
-          python manage.py spectacular --validate
+        run: python manage.py spectacular --validate
