@@ -98,7 +98,6 @@ def api_register(request):
         user = form.save()
         login(request, user)
         token, _ = Token.objects.get_or_create(user=user)
-        # Сериализуем данные пользователя
         user_data = RegisterDetailSerializer(user).data
         return JsonResponse({'token': token.key, 'user': user_data}, status=201)
     return JsonResponse({'errors': form.errors}, status=400)
@@ -172,7 +171,7 @@ def api_profile_update(request):
     calories = calculate_calories(user, user.training_level)
     macros   = calculate_macros(user.weight, age_cat, user.goal, user.gender)
 
-    # шарим шаблон/фолбэк
+    # ищем шаблон/фолбэк
     try:
         tpl = RecommendationTemplate.objects.get(
             gender=user.gender,
@@ -202,7 +201,7 @@ def api_profile_update(request):
     for name in workouts:
         Workout.objects.create(plan=plan, name=name)
 
-    # возвращаем status + текущий снимок
+    # возвращаем статус + текущий снимок
     return JsonResponse({
         'status': 'updated',
         'plan': {
@@ -234,10 +233,8 @@ def api_user_dashboard(request):
         macros = current.macros
         # Описание рекомендаций, сохранённое при создании плана
         description = current.training_recommendations
-        # Список оплаченных тренировок из отдельной таблицы
         workouts = list(current.workouts.values_list('name', flat=True))
     else:
-        # Если планов ещё нет, можем вернуть пустые значения или сгенерировать on‑the‑fly
         age_cat = get_age_category(user.age)
         calories = calculate_calories(user, user.training_level)
         macros = calculate_macros(user.weight, age_cat, user.goal, user.gender)
