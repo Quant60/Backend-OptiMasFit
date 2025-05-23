@@ -52,7 +52,7 @@ jobs:
         env:
           DATABASE_URL: postgres://postgres:postgres@localhost:5432/test_db
           DJANGO_SETTINGS_MODULE: optimassfit.settings
-        run: python manage.py migrate --noinput
+        run: python manage.py migrate --noinput --fake-initial
 
       - name: Run tests
         env:
