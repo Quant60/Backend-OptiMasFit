@@ -29,7 +29,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Debug:workspace
+      - name: Debug: workspace
         run: |
           echo "=== PWD ==="
           pwd
@@ -41,7 +41,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: "3.12"
+          python-version: '3.12'
 
       - name: Install dependencies
         run: |
@@ -51,13 +51,13 @@ jobs:
       - name: Run migrations
         env:
           DATABASE_URL: postgres://postgres:postgres@localhost:5432/test_db
-          DJANGO_SETTINGS_MODULE: optimassfit.optimassfit.settings
+          DJANGO_SETTINGS_MODULE: optimassfit.settings
         run: python manage.py migrate --noinput
 
       - name: Run tests
         env:
           DATABASE_URL: postgres://postgres:postgres@localhost:5432/test_db
-          DJANGO_SETTINGS_MODULE: optimassfit.optimassfit.settings
+          DJANGO_SETTINGS_MODULE: optimassfit.settings
         run: pytest --maxfail=1 --disable-warnings -q optimassfit
 
       - name: Lint with flake8
@@ -67,5 +67,5 @@ jobs:
 
       - name: Build OpenAPI schema
         env:
-          DJANGO_SETTINGS_MODULE: optimassfit.optimassfit.settings
+          DJANGO_SETTINGS_MODULE: optimassfit.settings
         run: python manage.py spectacular --validate
