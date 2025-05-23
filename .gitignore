@@ -1,0 +1,9 @@
+.venv/
+__pycache__/
+.idea/
+backend.py
+.github/workflows/
+optimassfit/__pycache__/
+users/__pycache__/
+users/templates/
+users/migrations/
