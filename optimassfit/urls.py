@@ -8,6 +8,6 @@ def home(request):                 # стартовая страница
 urlpatterns = [
     path('',        home,               name='home'),
     path('users/',  include('optimassfit.users.urls')),      # HTML
-    path('api/',    include(''optimassfit.users.api_urls')),  # JSON
+    path('api/',    include('optimassfit.users.api_urls')),  # JSON
     path('admin/',  admin.site.urls),
 ]
