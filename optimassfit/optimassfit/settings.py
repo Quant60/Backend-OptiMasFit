@@ -33,7 +33,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'users.apps.UsersConfig',
-    'optimassfit.users',
+    'optimassfit.optimassfit.users',
 
     'rest_framework',
     'rest_framework.authtoken',
