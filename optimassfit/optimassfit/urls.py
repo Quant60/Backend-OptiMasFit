@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.urls import include, path
 from django.shortcuts import render
 
-def home(request):                 # стартовая страница
+def home(request):                 # начальная страница
     return render(request, 'index.html')
 
 urlpatterns = [
