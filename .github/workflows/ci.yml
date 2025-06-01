@@ -51,7 +51,7 @@ jobs:
       - name: Run migrations
         env:
           DATABASE_URL: postgres://postgres:postgres@localhost:5432/test_db
-          DJANGO_SETTINGS_MODULE: optimassfit.settings
+           DJANGO_SETTINGS_MODULE: optimassfit.optimassfit.settings
         run: python manage.py migrate --noinput --fake
 
       - name: Lint with flake8
