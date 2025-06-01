@@ -4,9 +4,8 @@ __pycache__/
 backend.py
 optimassfit/__pycache__/
 users/__pycache__/
-optimassfit/users/templates/
+optimassfit/optimassfit/users/templates/
 users/migrations/
 
-optimassfit/users/__pycache__/
-optimassfit/users/migrations/
-optimassfit/users/__init__.py/
+optimassfit/optimassfit/users/__pycache__/
+

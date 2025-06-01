@@ -13,6 +13,7 @@ AUTH_USER_MODEL = 'users.User'
 from datetime import date
 from pathlib import Path
 import os
+from django.core.management.utils import get_random_secret_key
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -38,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'users',
+    'users.apps.UsersConfig',
     'rest_framework',
     'rest_framework.authtoken',
     "drf_spectacular",
@@ -56,7 +57,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'optimassfit.urls'
+ROOT_URLCONF = 'urls'
 
 TEMPLATES = [
     {
@@ -74,7 +75,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'optimassfit.wsgi.application'
+WSGI_APPLICATION = 'wsgi.application'
 
 
 # Database
@@ -91,19 +92,7 @@ DATABASES = {
     }
 }
 
-import os
-from django.core.management.utils import get_random_secret_key
 
-DATABASES = {
-    'default': {
-        'ENGINE':   'django.db.backends.postgresql',
-        'NAME':     os.getenv('POSTGRES_DB',     'your_default_db'),
-        'USER':     os.getenv('POSTGRES_USER',   'postgres'),
-        'PASSWORD': os.getenv('POSTGRES_PASSWORD','postgres'),
-        'HOST':     os.getenv('POSTGRES_HOST',   'localhost'),
-        'PORT':     os.getenv('POSTGRES_PORT',   '5432'),
-    }
-}
 
 SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', get_random_secret_key())
 
@@ -187,4 +176,43 @@ SPECTACULAR_SETTINGS["COMPONENTS"] = {
             "description": "Формат: **Token &lt;значение из /api/token/&gt;**",
         }
     }
+}
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'OptiMassFit API',
+    'DESCRIPTION': 'Серверное API для расчётов, планов и истории',
+    'VERSION': '1.0.2025',
+    'TAGS': [
+        {
+            'name': 'Misc',
+            'description': 'Утилитарный эндпоинт (точка входа в API).'
+        },
+        {
+            'name': 'Admin',
+            'description': 'CRUD-операции для администратора: управление шаблонами рекомендаций, планами и пользователями.'
+        },
+        {
+            'name': 'csrf',
+            'description': 'Установка CSRF-cookie для защиты POST/PUT/DELETE-запросов.'
+        },
+        {
+            'name': 'Plans',
+            'description': 'Эндпоинты для получения дашборда и списка планов текущего пользователя.'
+        },
+        {
+            'name': 'Auth',
+            'description': 'Регистрация, вход и выход пользователя (Auth).'
+        },
+        {
+            'name': 'Profile',
+            'description': 'Обновление профиля пользователя и создание новых снимков плана.'
+        },
+        {
+            'name': 'schema',
+            'description': 'Получение  JSON-схемы OpenAPI (api /schema/).'
+        },
+        {
+            'name': 'token',
+            'description': 'Получение токена через стандартный DRF Auth Token (api /token/).'
+        },
+    ],
 }

@@ -25,19 +25,20 @@ from rest_framework.response import Response
 from rest_framework import viewsets
 from django.db import IntegrityError
 from rest_framework import status
+from drf_spectacular.views import SpectacularAPIView
+from drf_spectacular.utils import extend_schema
 
 
-@extend_schema_view(
-    post=extend_schema(
-        tags=["Auth"],
-        request=LoginRequestSerializer,
-        responses=LoginResponseSerializer,
-    )
+@extend_schema(
+    tags=["token"],
+    summary="Получить токен аутентификации",
+    description=""
 )
-class TokenView(ObtainAuthToken):
+class CustomObtainAuthToken(ObtainAuthToken):
     pass
 
 @extend_schema(
+tags=["csrf"],
     examples=[
         OpenApiExample(
             name="Cookie set",
@@ -530,3 +531,14 @@ class RecommendationTemplateViewSet(viewsets.ModelViewSet):
                 {"detail": "Unable to create or update template."},
                 status=status.HTTP_400_BAD_REQUEST
             )
+
+@extend_schema(
+    tags=["schema"],
+    summary="Получить OpenAPI-схему",
+    description="Возвращает «сырую» JSON-схему API (OpenAPI 3.0)."
+)
+class CustomSpectacularAPIView(SpectacularAPIView):
+    """
+    Класс-наследник SpectacularAPIView, чтобы пометить его тегом 'schema'.
+    """
+    pass
