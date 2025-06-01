@@ -14,7 +14,7 @@ sys.path.insert(0, os.path.join(BASE_DIR, 'optimassfit', 'optimassfit'))
 
 def main():
     # теперь DJANGO_SETTINGS_MODULE указывает просто на settings.py в этой подпапке
-    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'settings')
+    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "optimassfit.setting")
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:
