@@ -4,8 +4,17 @@ __pycache__/
 backend.py
 optimassfit/__pycache__/
 users/__pycache__/
+<<<<<<< HEAD
 optimassfit/optimassfit/users/templates/
 users/migrations/
 
 optimassfit/optimassfit/users/__pycache__/
 
+=======
+optimassfit/users/templates/ #frontend
+/optimassfit/users/migrations/
+
+optimassfit/users/__pycache__/
+optimassfit/users/migrations/
+optimassfit/users/__init__.py/
+>>>>>>> 65f2cd7528ad9b06a1781855faa8208f95a74a47

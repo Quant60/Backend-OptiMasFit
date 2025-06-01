@@ -5,7 +5,7 @@ def calculate_calories(profile, training_level):
     """Рассчитывает дневную норму калорий с учетом возраста, цели и уровня тренировок"""
     age_category = get_age_category(profile.age)
 
-    # Основной обмен веществ (BMR) для мужчин и женщин
+    # Основной обмен веществ (BMR) для мужчин 
     if profile.gender == 'male':
         bmr = (10 * profile.weight) + (6.25 * profile.height) - (5 * profile.age) + 5
     else:  # Для женщин
