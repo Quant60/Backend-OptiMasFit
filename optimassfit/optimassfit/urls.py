@@ -7,7 +7,7 @@ def home(request):                 # начальная страница
 
 urlpatterns = [
     path('',        home,               name='home'),
-    path('users/',  include('optimassfit.users.urls')),      # HTML
-    path('api/',    include('optimassfit.users.api_urls')),  # JSON
+    path('users/',  include('optimassfit.optimassfit.users.urls')),      # HTML
+    path('api/',    include('optimassfit.optimassfit.users.api_urls')),  # JSON
     path('admin/',  admin.site.urls),
 ]
